@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page With Light/Dark Mode</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="big-wrapper light">
+        <img src="./img/shape.png" alt="" class="shape" />
+
+        <header>
+          <div class="container">
+            <div class="logo">
+              <img src="data:image/png;base64,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" alt="Logo" />
+              <h3>NetBSD</h3>
+            </div>
+
+            <div class="links">
+              <ul>
+                <li><a href="sjf.html">SJF</a></li>
+                <li><a href="srtf.html">SRTF</a></li>
+                <li><a href="multilevelqueue.html">MLFQ</a></li>
+                <li><a href="Banker Algorithms.html">Banking algo</a></li>
+                
+              </ul>
+            </div>
+
+            <div class="overlay"></div>
+
+            <div class="hamburger-menu">
+              <div class="bar"></div>
+            </div>
+          </div>
+        </header>
+
+        <div class="showcase-area">
+          <div class="container">
+            <div class="left">
+              <div class="big-title">
+                <h1>Netbsd is the future,</h1>
+                <h1>Start Exploring now.</h1>
+              </div>
+              <p class="text">
+                NetBSD is a UNIX derivative and is descended directly from the Berkeley Networking Release 2 (BSD Net/2) and was published for the first time in March 1993. NetBSD was provided for several platforms from the beginning and got that way to the Atari, Amiga, Mac, PC and other platforms. 
+              <div class="cta">
+                <a href="vid.mp4" class="btn">Animation here</a>
+              </div>
+            </div>
+
+            <div class="right">
+              <img src="./img/person.png" alt="Person Image" class="person" />
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-area">
+          <div class="container">
+            <button class="toggle-btn">
+              <i class="far fa-moon"></i>
+              <i class="far fa-sun"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JavaScript Files -->
+
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

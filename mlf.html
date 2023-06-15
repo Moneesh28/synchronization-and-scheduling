@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilevel Feedback Queue</title>
+    <script>
+        class Process {
+            constructor(pid, bt) {
+                this.pid = pid;
+                this.bt = bt;
+                this.remainingTime = bt;
+                this.priority = 0;
+            }
+        }
+
+        let processes = [];
+        let timeQuantum = 1;
+        let numProcesses = 0;
+
+        function addProcess() {
+            let btInput = document.getElementById('burst-time');
+            let burstTime = parseInt(btInput.value);
+            if (!isNaN(burstTime) && burstTime > 0) {
+                let pid = numProcesses + 1;
+                processes.push(new Process(pid, burstTime));
+                numProcesses++;
+
+                let processTable = document.getElementById('process-table');
+                let newRow = processTable.insertRow(-1);
+                let pidCell = newRow.insertCell(0);
+                let btCell = newRow.insertCell(1);
+                pidCell.innerHTML = pid;
+                btCell.innerHTML = burstTime;
+
+                btInput.value = '';
+            }
+        }
+
+        function runMLFQ() {
+            let time = 0;
+            let completedProcesses = 0;
+
+            while (completedProcesses < numProcesses) {
+                let currentProcess = null;
+
+                // Find the highest priority process in the queue
+                for (let i = 0; i < processes.length; i++) {
+                    if (processes[i].remainingTime > 0) {
+                        if (currentProcess == null || processes[i].priority < currentProcess.priority) {
+                            currentProcess = processes[i];
+                        }
+                    }
+                }
+
+                if (currentProcess != null) {
+                    // Execute the process for the time quantum
+                    let remainingTime = currentProcess.remainingTime;
+                    let executeTime = remainingTime <= timeQuantum ? remainingTime : timeQuantum;
+                    currentProcess.remainingTime -= executeTime;
+                    time += executeTime;
+
+                    // Update the priority based on the remaining time
+                    if (currentProcess.remainingTime > 0) {
+                        currentProcess.priority++;
+                    }
+
+                    // Check if the process is completed
+                    if (currentProcess.remainingTime == 0) {
+                        completedProcesses++;
+                    }
+                } else {
+                    // No process available, increment time
+                    time++;
+                }
+            }
+
+            displayResults();
+        }
+
+        function displayResults() {
+            let waitingTimeSum = 0;
+            let turnaroundTimeSum = 0;
+
+            let processTable = document.getElementById('process-table');
+            for (let i = 0; i < processTable.rows.length; i++) {
+                let pid = parseInt(processTable.rows[i].cells[0].innerHTML);
+                let waitingTime = time - processes[pid - 1].bt;
+                let turnaroundTime = waitingTime + processes[pid - 1].bt;
+
+                processTable.rows[i].insertCell(2).innerHTML = waitingTime;
+                processTable.rows[i].insertCell(3).innerHTML = turnaroundTime;
+
+                waitingTimeSum += waitingTime;
+                turnaroundTimeSum += turnaroundTime;
+            }
+
+            let avgWaitingTime = waitingTimeSum / numProcesses;
+            let avgTurnaroundTime = turnaroundTimeSum / numProcesses;
+
+            document.getElementById('avg-waiting-time').innerHTML = avgWaitingTime.toFixed(2);
+            document.getElementById('avg-turnaround-time').innerHTML = avgTurnaroundTime.toFixed(2);
+
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <h2>Multilevel Feedback Queue</h2>
+    <table id="process-table" border="1">
+        <tr>
+            <th>Process ID</th>
+            <th>Burst Time</th>
+        </tr>
+    </table>
+    <br>
+    <label for="burst-time">Enter Burst Time:</label>
+    <input type="number" id="burst-time" min="1">
+    <button onclick="addProcess()">Add Process</button>
+    <br><br>
+    <button onclick="runMLFQ()">Run MLFQ</button>
+    <br><br>
+    <div id="results" style="display: none;">
+        <h3>Results</h3>
+        <table id="result-table" border="1">
+            <tr>
+                <th>Process ID</th>
+                <th>Burst Time</th>
+                <th>Waiting Time</th>
+                <th>Turnaround Time</th>
+            </tr>
+        </table>
+        <br>
+        <label>Average Waiting Time: <span id="avg-waiting-time"></span></label>
+        <br>
+        <label>Average Turnaround Time: <span id="avg-turnaround-time"></span></label>
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANKER'S ALGORITHM</title>
+    <script src="script5.js" defer></script>
+    <link rel="stylesheet" href="wstyle.css">
+</head>
+<body>
+    <center><h2>BANKER'S ALGORITHM</h2></center>
+    <center><form method="post" name="sample0">
+        <p1>Available Vector</p1>&ensp;
+        A  : &ensp;<input type="number" name="a0" min="0" oninput="validity.valid||(value='');">&ensp;
+        B : &ensp;<input type="number" name="b0" min="0" oninput="validity.valid||(value='');">&ensp;
+        C : &ensp;<input type="number" name="c0" min="0" oninput="validity.valid||(value='');">
+        <br><br><br>
+        <input class="button" type= "button" name="avail" value="Submit Data" onclick="availabledata();">
+        <input class="button" type= "reset" name="reset" value="Clear Data">
+        
+        <br>
+        <br><br><br>    
+    </form>
+    <form method="POST" name="sample">
+        <p1>Allocation Matrix</p1> &nbsp;
+        A  : &ensp;<input type="number" name="a" min="0" oninput="validity.valid||(value='');">&ensp;
+        B : &ensp;<input type="number" name="b" min="0" oninput="validity.valid||(value='');">&ensp;
+        C : &ensp;<input type="number" name="c" min="0" oninput="validity.valid||(value='');">
+        <br><br><br>
+        <input class="button" type= "button" name="add" value="Add Data" onclick="adddata();">
+        <input class="button" type= "reset" name="reset" value="Clear Data">
+        <br>
+        <br>
+        <br>
+        <h3>Allocation Matrix</h3>
+        <table id="tb1" class="table" border="1">
+            <tr>
+                <th>Process</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+            </tr>
+        </table>
+    </form>
+    <br><br><br><br>
+    
+    <form method="POST" name="sample1">
+        <br>
+        <p1>Max Matrix</p1> &nbsp;
+        A  : &ensp;<input type="number" name="a1" min="0" oninput="validity.valid||(value='');">&ensp;
+        B : &ensp;<input type="number" name="b1" min="0" oninput="validity.valid||(value='');">&ensp;
+        C : &ensp;<input type="number" name="c1" min="0" oninput="validity.valid||(value='');">
+        <br><br><br>
+        <input class="button" type= "button" name="add" value="Add Data" onclick="adddata1();"> 
+        <input class="button" type= "reset" name="reset" value="Clear Data">
+        <br>
+        <br>
+        <h3>Max Matrix</h3>
+        <table id="tb2" class="table" border="1">
+            <tr>
+                <th>Process</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+            </tr>
+        </table>
+        <br><br><br><br>
+    
+        
+    <h3>Need Matrix</h3>
+    <input class="button2" type="button" name="need" value="Get Data" onclick="getdata();">
+    <table id="tb3" class="table" border="1">
+    <tr>
+        <th>Process</th>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+    </tr>
+    </table>
+    
+    </form>
+
+    <p id="safe-sequence"></p>
+    <br><br>
+    <input class="button1" type="button" value="Reset" onClick="location.href='Banker Algorithms.html'"></center>
+</body>
+</html>
